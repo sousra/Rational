@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-    Rational x(-1024, 32), y(-3, 9), z(2, 3), w(-1025, 32);
+    Rational x(-1024, 32), y(-3, 9), z(2, 0), w(-1025, 32);
     cout << "neg x: ";
     (x.neg()).print();
 

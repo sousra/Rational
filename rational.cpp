@@ -80,6 +80,9 @@ Rational Rational::neg() const {
 }
 
 Rational Rational::inv() const {
+    if (nan) {
+        return Rational(1, 0);
+    }
     if (numerator < 0) {
         return Rational(-denumerator, -numerator);
     }
@@ -87,6 +90,9 @@ Rational Rational::inv() const {
 }
 
 Rational Rational::sum(Rational r) const {
+    if (nan || r.nan) {
+        return Rational(1, 0);
+    }
     int d = lcm(denumerator, r.denumerator);
     return Rational(numerator * d / denumerator +
                     r.numerator * d / r.denumerator, d);
@@ -97,6 +103,9 @@ Rational Rational::sub(Rational r) const {
 }
 
 Rational Rational::mul(Rational r) const {
+    if (nan || r.nan) {
+        return Rational(1, 0);
+    }
     return Rational(numerator * r.numerator,
                     denumerator * r.denumerator);
 }
@@ -134,14 +143,16 @@ bool Rational::geq(Rational r) const {
 }
 
 void Rational::print() const {
-    Rational r = reduce();
-    cout << r.numerator << "/" << r.denumerator << endl;
+    if(nan) {
+        cout << "<NAN>\n";
+    }
+    else {
+        Rational r = reduce();
+        cout << r.numerator << "/" << r.denumerator << endl;
+    }
 }
 
 void Rational::scan() {
     cin >> numerator >> denumerator;
-    if (!denumerator) {
-        cout << endl << "<NAN>" << endl;
-        exit(EXIT_FAILURE);
-    }
+    nan = (denumerator == 0);
 }

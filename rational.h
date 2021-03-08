@@ -1,16 +1,17 @@
 #ifndef RATIONAL_H_INCLUDED
 #define RATIONAL_H_INCLUDED
 
+#include <iostream>
+#include <cstdbool>
+
 using namespace std;
 
 class Rational {
 public:
 
     explicit Rational(int x = 1, int y = 1) :  numerator(x), denumerator(y) {
-        if (!denumerator) {
-            cout << endl << "<NAN>" << endl;
-            exit(EXIT_FAILURE);
-        }
+        nan = (y == 0);
+
     }
 
     Rational operator + (const Rational&);
@@ -24,7 +25,7 @@ public:
     bool operator > (const Rational&);
     bool operator >= (const Rational&);
 
-    // Сокращение
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     Rational reduce() const;
 
     // *-1
@@ -54,9 +55,9 @@ public:
     // >=
     bool geq(Rational) const;
 
-    // Вывести на экран
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     void print() const;
-    // Считать с клавиатуры
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     void scan();
 private:
 
